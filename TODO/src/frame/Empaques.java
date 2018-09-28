@@ -1,4 +1,5 @@
 package frame;
+import javax.swing.JOptionPane;
 public class Empaques extends javax.swing.JFrame {
     connection con;
     Object datos[];
@@ -38,12 +39,10 @@ public class Empaques extends javax.swing.JFrame {
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 38, -1, -1));
 
         lblNombre.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        lblNombre.setForeground(new java.awt.Color(0, 0, 0));
         lblNombre.setText("Nombre:");
         getContentPane().add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, -1, 19));
 
         lblCapacidad.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        lblCapacidad.setForeground(new java.awt.Color(0, 0, 0));
         lblCapacidad.setText("Capacidad :");
         getContentPane().add(lblCapacidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, -1, 30));
 
@@ -67,14 +66,13 @@ public class Empaques extends javax.swing.JFrame {
                 btnAceptarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnAceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(227, 192, -1, -1));
+        getContentPane().add(btnAceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(227, 192, 70, -1));
 
         cmbTipo.setBackground(new java.awt.Color(0, 153, 0));
         cmbTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tipo De Unidad", "mililitros", "kilos", "pulgada", "metros" }));
         getContentPane().add(cmbTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(236, 138, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("Franklin Gothic Medium Cond", 3, 36)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Nuevo empaque");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 30, 250, 37));
 
@@ -111,6 +109,13 @@ public class Empaques extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBorrarActionPerformed
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
+        if("".equals(txtNombre.getText())){
+            JOptionPane.showMessageDialog(null, "Falta Nombre");
+        }else if("".equals(txtCapacidad.getText())){
+            JOptionPane.showMessageDialog(null, "Falta Capacidad");
+        } else if(cmbTipo.getSelectedIndex()==0){
+            JOptionPane.showMessageDialog(null, "Falta Tipo");
+        }else{   
         datos= new Object [5];
         datos[0]=(con.consulaEmpaque()+1);
         datos[1]=txtNombre.getText();
@@ -118,6 +123,10 @@ public class Empaques extends javax.swing.JFrame {
         datos[3]="A";
         datos[4]=cmbTipo.getSelectedIndex();
         con.insertaEmpaques(datos);
+        txtNombre.setText("");
+        txtCapacidad.setText("");
+        cmbTipo.setSelectedIndex(0);
+        }
     }//GEN-LAST:event_btnAceptarActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed

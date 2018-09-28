@@ -39,8 +39,6 @@ public class connection {
                 + "user=admin;password=admin1";
     }
     
-    
-
     public void abreConexion() {
         try {
             con = DriverManager.getConnection(conexionURL);

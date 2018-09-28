@@ -4,6 +4,9 @@
  * and open the template in the editor.
  */
 package frame;
+
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author rojac
@@ -120,6 +123,13 @@ public class InsertarLab extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
+
+        if("".equals(txtNombre.getText())){
+            JOptionPane.showMessageDialog(null, "Falta Nombre");
+        }else if("".equals(txtOrigen.getText())){
+            JOptionPane.showMessageDialog(null, "Falta Origen");
+        }
+        else{
         datos = new Object [4];
         datos [0] = (con.consultaLaboID()+1);
         datos [1] = txtNombre.getText();
@@ -128,6 +138,7 @@ public class InsertarLab extends javax.swing.JFrame {
         con.insertaLaboratorio(datos);
         txtNombre.setText("");
         txtOrigen.setText("");
+        }
     }//GEN-LAST:event_btnAceptarActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
