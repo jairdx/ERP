@@ -43,7 +43,7 @@ public class connection {
     }
 
     /*-----------------------------------------------------------
-    Categorias
+    Categorias todo lo referente a categorias esta a continuacion 
     ------------------------------------------------------------*/
     public void consultaCategorias(JTable tabla) {
         DefaultTableModel tablaTemp = (DefaultTableModel) tabla.getModel();
@@ -278,6 +278,7 @@ public class connection {
     }
     //----------------------------------------------
 
+    // el siguiente metodo busca al usuario que se conecto al login para poder saber quien fue el que inicio sesion 
     public String consultaUser(String ID) {
         cadenaSQL = "select e.Nombre,e.Apaterno,e.Amaterno from EMPLEADOS e "
                 + " inner join Usuarios u on e.idEmpleado=u.idEmpleado where u.Nombre= '" + ID
@@ -296,7 +297,7 @@ public class connection {
         }
         return nom;
     }
-
+    //el siguiente metodo sirve para buscar al usuario y hacer comprobaciones de a que menu ira dependiendo que en un futuro nos pidan esa opcion 
     public int login(String user, String pass) {
         int resultado = 0, encontro = 0, tipo = 0;
 
@@ -328,7 +329,7 @@ public class connection {
         }
         return resultado;
     }
-
+    //Trae el ultimo ID de el empaque almacenado
     public int consulaEmpaque() {
         int idEmpaque = 0;
         cadenaSQL = "select top(1) idEmpaque from empaques order by idEmpaque desc";
@@ -343,7 +344,7 @@ public class connection {
         }
         return idEmpaque;
     }
-
+    //inserta empaques en su tabla 
     public void insertaEmpaques(Object datos[]) {
         cadenaSQL = "insert into empaques values("
                 + datos[0] + ",'"
@@ -359,7 +360,8 @@ public class connection {
             Logger.getLogger(connection.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    
+    //hace un eliminado logico de la tabla en cuestion 
     public void EliminarEmpaque(String id) {
         cadenaSQL = "update empaques set estatus= 'I' where idEmpaque=" + id;
         try {
@@ -369,7 +371,6 @@ public class connection {
             Logger.getLogger(connection.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
     public void EliminarLab(String id) {
         cadenaSQL = "update laboratorios set estatus= 'I' where idLaboratorio=" + id;
         try {
@@ -379,7 +380,19 @@ public class connection {
             Logger.getLogger(connection.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    public void deleteUnidadMedia(String nombre) {
+        cadenaSQL = "update UnidadMedida set Status='I' where nombre="
+                + "'" + nombre.toString() + "'";
+        try {
+            stn = (Statement) con.createStatement();
+            stn.executeUpdate(cadenaSQL);
+            JOptionPane.showMessageDialog(null, "i done babe");
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "i can't do it babe :(");
+        }
+    }
+   //------------------------------------------------------
+    //actualizar general de la tablas 
     public void Actualizar(Object datos[]) {
         cadenaSQL = "update empaques set nombre='" + datos[1].toString() + "',capacidad=" + datos[2].toString() + ",estatus='" + datos[3].toString() + "' where idEmpaque=" + datos[0].toString();
         try {
@@ -389,7 +402,6 @@ public class connection {
             Logger.getLogger(connection.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
     public void ActualizarLab(Object datos[]) {
         cadenaSQL = "update laboratorios set nombre='" + datos[1].toString() + "',origen='" + datos[2].toString() + "',estatus='" + datos[3].toString() + "' where idLaboratorio=" + datos[0].toString();
         try {
@@ -399,7 +411,8 @@ public class connection {
             Logger.getLogger(connection.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+//---------------------------------------------------
+    //--consulta unicamente los empaques activos 
     public void consultaTodosEmpaquesActivos(JTable tabla) {
         DefaultTableModel tablaTemp = (DefaultTableModel) tabla.getModel();
         cadenaSQL = "select e.idEmpaque,e.nombre,e.capacidad,UM.nombre as unidad,e.estatus from empaques e "
@@ -421,7 +434,7 @@ public class connection {
             Logger.getLogger(connection.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+//consulta id ultimo de unidad medida 
     public int consultaidUnidadMedia() {
         int id = 0;
         cadenaSQL = "select top(1) idUnidad from UnidadMedida order by idUnidad desc";
@@ -436,7 +449,7 @@ public class connection {
         }
         return id;
     }
-
+//inserta laboratorios 
     public void insertaLaboratorio(Object datos[]) {
         cadenaSQL = "insert into Laboratorios values ("
                 + datos[0] + ",'"
@@ -451,7 +464,7 @@ public class connection {
             Logger.getLogger(Connection.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+//consulta ultima id de laboratorio
     public int consultaLaboID() {
         int idLaboratorio = 0;
         cadenaSQL = "select top(1) idLaboratorio from Laboratorios order by idLaboratorio desc";
@@ -466,7 +479,7 @@ public class connection {
         }
         return idLaboratorio;
     }
-
+//consulta TODOS los laboratorios en la base
     public void consultaLaboratorios(JTable tabla) {
         DefaultTableModel tablaTemp = (DefaultTableModel) tabla.getModel();
         cadenaSQL = "Select * from Laboratorios";
@@ -486,7 +499,7 @@ public class connection {
             Logger.getLogger(Connection.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+//consulta labos activos
     public void consultaLaboratoriosActivos(JTable tabla) {
         DefaultTableModel tablaTemp = (DefaultTableModel) tabla.getModel();
         cadenaSQL = "Select * from Laboratorios where estatus='A'";
@@ -506,7 +519,7 @@ public class connection {
             Logger.getLogger(Connection.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+//consulta labos activos donde el usuario te diga el numero del labo
     public void consultaLaboratorioActivo(JTable tabla, int id) {
         DefaultTableModel tablaTemp = (DefaultTableModel) tabla.getModel();
         cadenaSQL = "Select * from Laboratorios where estatus='A' and idLaboratorio= " + id;
@@ -526,7 +539,7 @@ public class connection {
             Logger.getLogger(Connection.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+//inserta en la tabla de unidad medida
     public void insertUnidadMedida(Object datos[]) {
         cadenaSQL = "execute asp_insertarUnidadMedida "
                 + datos[0].toString() + ",'"
@@ -540,7 +553,7 @@ public class connection {
             JOptionPane.showMessageDialog(null, "No se pueden ingresar los datos");
         }
     }
-
+//consulta todos en unidad medida
     public void consultaALLUnidadMedida(JTable tabla) {
         DefaultTableModel tablaTemp = (DefaultTableModel) tabla.getModel();
         cadenaSQL = "select* from UnidadMedida ";
@@ -564,7 +577,7 @@ public class connection {
             Logger.getLogger(connection.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+//consulta todos activos en unidad medida
     public void consultaTodosUnidadMedida(JTable tabla) {
         DefaultTableModel tablaTemp = (DefaultTableModel) tabla.getModel();
         cadenaSQL = "select idUnidad,nombre,siglas from UnidadMedida where estatus='A'";
@@ -586,19 +599,7 @@ public class connection {
             Logger.getLogger(connection.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
-    public void deleteUnidadMedia(String nombre) {
-        cadenaSQL = "update UnidadMedida set Status='I' where nombre="
-                + "'" + nombre.toString() + "'";
-        try {
-            stn = (Statement) con.createStatement();
-            stn.executeUpdate(cadenaSQL);
-            JOptionPane.showMessageDialog(null, "i done babe");
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "i can't do it babe :(");
-        }
-    }
-
+//y actualiza todo en unidad medida 
     public void UpdateUnidadMedia(Object datos[]) {
         cadenaSQL = "update UnidadMedida set nombre='" + datos[1].toString() + "', siglas='" + datos[2].toString() + "', Status='" + datos[3].toString() + "' where idUnidad=" + datos[0].toString();
         try {
@@ -609,7 +610,7 @@ public class connection {
             JOptionPane.showMessageDialog(null, "i can't do it babe :(");
         }
     }
-
+//consulta todos los empaques que esten inactivos por si el usuario quiere regresar uno
     public void consultaTodosEmpaquesInabilitados(JTable tabla) {
         DefaultTableModel tablaTemp = (DefaultTableModel) tabla.getModel();
         cadenaSQL = "select e.idEmpaque,e.nombre,e.capacidad,UM.nombre as unidad,e.estatus from empaques e "
@@ -631,7 +632,7 @@ public class connection {
             Logger.getLogger(connection.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+//consulta empaques especificos que esten activos
     public void consultaEmpaques(JTable tabla, int ID) {
         DefaultTableModel tablaTemp = (DefaultTableModel) tabla.getModel();
         cadenaSQL = "select e.idEmpaque,e.nombre,e.capacidad,e.estatus,UM.nombre as unidad from empaques e "
@@ -654,7 +655,7 @@ public class connection {
             Logger.getLogger(connection.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+//consulta todos los empaques con un inner join
     public void consultaTodosEmpaquesTodes(JTable tabla) {
         DefaultTableModel tablaTemp = (DefaultTableModel) tabla.getModel();
         cadenaSQL = "select e.idEmpaque,e.nombre,e.capacidad,UM.nombre as unidad,e.estatus from empaques e "
