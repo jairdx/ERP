@@ -28,11 +28,18 @@ public class connection {
     String nom;
 
     public connection() {
+//        conexionURL = "jdbc:sqlserver:"
+//                + "//RAGGED516\\SQLEXPRESS:1033;"
+//                + "databaseName=Agroquimic;"
+//                + "user=adminOtro;password=admin";
+        
         conexionURL = "jdbc:sqlserver:"
-                + "//RAGGED516\\SQLEXPRESS:1033;"
-                + "databaseName=Agroquimic;"
-                + "user=adminOtro;password=admin";
+                + "//DESKTOP-C1F48VC\\SQLEXPRESS:1433;"
+                + "databaseName=Agroquimicaprueba;"
+                + "user=admin;password=admin1";
     }
+    
+    
 
     public void abreConexion() {
         try {
