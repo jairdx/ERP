@@ -106,7 +106,7 @@ public class Empaques extends javax.swing.JFrame {
         txtNombre.setText("");
         txtCapacidad.setText("");
         cmbTipo.setSelectedIndex(0);
-        hola
+        System.out.println("hola mundo");
     }//GEN-LAST:event_btnBorrarActionPerformed
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
