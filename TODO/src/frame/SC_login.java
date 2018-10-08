@@ -12,7 +12,7 @@ public class SC_login extends javax.swing.JFrame {
         con = new connection();
         con.abreConexion();
         this.setLocationRelativeTo(null);
-        System.out.println("hola prros");
+        System.out.println("hola prros hjdjbcjhdcb");
     }
 
     /**
