@@ -6,12 +6,13 @@ public class SC_login extends javax.swing.JFrame {
 
     connection con;
     public static String nombre;
-
+   
     public SC_login() {
         initComponents();
         con = new connection();
         con.abreConexion();
         this.setLocationRelativeTo(null);
+        System.out.println("hola prros hjdjbcjhdcb");
     }
 
     /**
