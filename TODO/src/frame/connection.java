@@ -325,7 +325,7 @@ public class connection {
         }
         consultaUniTo1(tabla);
     }
-//METODOS PARA ACTUALIZAR UNA UNIDAD DE MEDIDA
+//METODOS PARA ACTUALIZAR UN LABORATORIO
     public void consultaLabTo1(JTable tabla) {
         limpiarTabla(tabla);
         DefaultTableModel tablaTemp = (DefaultTableModel) tabla.getModel();
@@ -367,6 +367,50 @@ public class connection {
             tablaT.removeRow(i);
         }
         consultaLabTo1(tabla);
+    }
+    //METODOS PARA ACTUALIZAR UN EMPAQUE
+    public void consultaEmpTo1(JTable tabla) {
+        limpiarTabla(tabla);
+        DefaultTableModel tablaTemp = (DefaultTableModel) tabla.getModel();
+        cadenaSQL = "Select * from Empaques ";
+        try {
+            stn = (Statement) con.createStatement();
+            rs = stn.executeQuery(cadenaSQL);
+            while (rs.next()) {
+                String id = rs.getString("idEmpaque");
+                String nombre = rs.getString("nombre");
+                String capacidad  = rs.getString("capacidad");
+                String estatus = rs.getString("estatus");
+                String idUnidad= rs.getString("idUnidad");
+                Object datosRenglon[] = {id,nombre,capacidad,estatus,idUnidad};
+                tablaTemp.addRow(datosRenglon);
+            }
+            tabla.setModel(tablaTemp);
+        } catch (SQLException ex) {
+            Logger.getLogger(connection.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    public void modificaEmpaque(String name, int ID,String capacidad, String estatus,int idUnidad, JTable tabla) {
+        try {
+            cadenaSQL = "update Empaques set nombre ='" + name + "', capacidad ='" + capacidad + "' , estatus= '" + estatus+"' , idUnidad= '" + idUnidad+ "' where idEmpaque=" + ID + "";
+           
+            try {
+                stn = (Statement) con.createStatement();
+                stn.execute(cadenaSQL);
+
+            } catch (SQLException ex) {
+                Logger.getLogger(connection.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } catch (Exception e) {
+        }
+        limpiarConsultarEmp(tabla);
+    }
+    public void limpiarConsultarEmp(JTable tabla) {
+        DefaultTableModel tablaT = (DefaultTableModel) tabla.getModel();
+        for (int i = tablaT.getRowCount() - 1; i > -1; i--) {
+            tablaT.removeRow(i);
+        }
+        consultaEmpTo1(tabla);
     }
     // el siguiente metodo busca al usuario que se conecto al login para poder saber quien fue el que inicio sesion 
     public String consultaUser(String ID) {

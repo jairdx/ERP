@@ -14,25 +14,26 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author 72724
  */
-public class laboratorioModificar extends javax.swing.JFrame {
+public class empaqueModificar extends javax.swing.JFrame {
 
     connection con;
 
-    public laboratorioModificar() {
+    public empaqueModificar() {
         initComponents();
         con = new connection();
         con.abreConexion();
         this.setLocationRelativeTo(null);
-        con.consultaLabTo1(tablaCategorias);
+        con.consultaEmpTo1(tablaCategorias);
     }
     Object datos[];
     String x;
     DefaultTableModel m, n;
 
     private void limpiarCampos() {
-        txtIDLab.setText("");
-        txtOrigen.setText("");
-        txtNombreLaboratoiro.setText("");
+        txtIDEmp.setText("");
+        txtIdUnidad.setText("");
+        txtCapacidad.setText("");
+        txtNombreEmpaque.setText("");
     }
 
     /**
@@ -50,12 +51,14 @@ public class laboratorioModificar extends javax.swing.JFrame {
         buttonGroup2 = new javax.swing.ButtonGroup();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaCategorias = new javax.swing.JTable();
-        txtOrigen = new javax.swing.JTextField();
-        txtNombreLaboratoiro = new javax.swing.JTextField();
+        txtIdUnidad = new javax.swing.JTextField();
+        txtNombreEmpaque = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        txtCapacidad = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        txtIDLab = new javax.swing.JTextField();
+        txtIDEmp = new javax.swing.JTextField();
         btnActualizarCat = new javax.swing.JButton();
         btnCancelarCategoria = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
@@ -82,11 +85,11 @@ public class laboratorioModificar extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID ", "NOMBRE", "ORIGEN", "ESTATUS"
+                "ID ", "NOMBRE", "CAPACIDAD", "ESTATUS", "ID UNIDAD"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -101,39 +104,51 @@ public class laboratorioModificar extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tablaCategorias);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 20, 380, 204));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 20, 380, 260));
 
-        txtOrigen.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 204, 0)));
-        txtOrigen.addActionListener(new java.awt.event.ActionListener() {
+        txtIdUnidad.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 204, 0)));
+        txtIdUnidad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtOrigenActionPerformed(evt);
+                txtIdUnidadActionPerformed(evt);
             }
         });
-        getContentPane().add(txtOrigen, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 130, 230, -1));
+        getContentPane().add(txtIdUnidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 100, 210, -1));
 
-        txtNombreLaboratoiro.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 204, 0)));
-        txtNombreLaboratoiro.addActionListener(new java.awt.event.ActionListener() {
+        txtNombreEmpaque.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 204, 0)));
+        txtNombreEmpaque.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNombreLaboratoiroActionPerformed(evt);
+                txtNombreEmpaqueActionPerformed(evt);
             }
         });
-        getContentPane().add(txtNombreLaboratoiro, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 100, 230, -1));
+        getContentPane().add(txtNombreEmpaque, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 140, 210, -1));
 
         jLabel7.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel7.setText("ORIGEN :");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, -1, -1));
+        jLabel7.setText("ID UNIDAD:");
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, -1, -1));
 
         jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("NOMBRE :");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, -1, -1));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, -1, -1));
+
+        jLabel8.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel8.setText("CAPACIDAD : ");
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, -1, -1));
+
+        txtCapacidad.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 204, 0)));
+        txtCapacidad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCapacidadActionPerformed(evt);
+            }
+        });
+        getContentPane().add(txtCapacidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 170, 210, -1));
 
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("ID:");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 24, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 24, -1));
 
-        txtIDLab.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 204, 0)));
-        txtIDLab.setEnabled(false);
-        getContentPane().add(txtIDLab, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 60, 230, -1));
+        txtIDEmp.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 204, 0)));
+        txtIDEmp.setEnabled(false);
+        getContentPane().add(txtIDEmp, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 60, 250, -1));
 
         btnActualizarCat.setText("Actualizar");
         btnActualizarCat.addActionListener(new java.awt.event.ActionListener() {
@@ -141,7 +156,7 @@ public class laboratorioModificar extends javax.swing.JFrame {
                 btnActualizarCatActionPerformed(evt);
             }
         });
-        getContentPane().add(btnActualizarCat, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 190, -1, -1));
+        getContentPane().add(btnActualizarCat, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 250, -1, -1));
 
         btnCancelarCategoria.setText("Cancelar");
         btnCancelarCategoria.addActionListener(new java.awt.event.ActionListener() {
@@ -149,30 +164,30 @@ public class laboratorioModificar extends javax.swing.JFrame {
                 btnCancelarCategoriaActionPerformed(evt);
             }
         });
-        getContentPane().add(btnCancelarCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 191, -1, -1));
+        getContentPane().add(btnCancelarCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, -1, -1));
 
         jLabel5.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setText("Modificar un laboratorio");
+        jLabel5.setText("Modificar un empaque");
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 330, 41));
 
         buttonGroup1.add(rdbActivo);
         rdbActivo.setForeground(new java.awt.Color(0, 0, 0));
         rdbActivo.setText("Activo");
-        getContentPane().add(rdbActivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(97, 156, -1, -1));
+        getContentPane().add(rdbActivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 210, -1, -1));
 
         buttonGroup1.add(rdbInactivo);
         rdbInactivo.setForeground(new java.awt.Color(0, 0, 0));
         rdbInactivo.setText("Inactivo");
-        getContentPane().add(rdbInactivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 160, 70, -1));
+        getContentPane().add(rdbInactivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 210, 70, -1));
 
         jLabel4.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel4.setText("Estatus :");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 156, 49, 23));
+        jLabel4.setText("ESTATUS :");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, 60, 23));
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/26204c8c-443a-4511-adca-0574146f51b9image22.jpg"))); // NOI18N
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 710, 230));
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 710, 290));
 
         jMenu1.setText("Opciones");
         jMenu1.setToolTipText("Opciones");
@@ -196,9 +211,9 @@ public class laboratorioModificar extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtOrigenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtOrigenActionPerformed
+    private void txtIdUnidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdUnidadActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtOrigenActionPerformed
+    }//GEN-LAST:event_txtIdUnidadActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         Menu M=new Menu();
@@ -207,16 +222,17 @@ public class laboratorioModificar extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void btnActualizarCatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarCatActionPerformed
-        int v=Integer.parseInt(txtIDLab.getText());
-        String y=txtNombreLaboratoiro.getText();
-        String x=txtOrigen.getText();
+        int v=Integer.parseInt(txtIDEmp.getText());
+        String y=txtNombreEmpaque.getText();
+        int x=Integer.parseInt(String.valueOf(txtIdUnidad.getText()));
+        String l=txtCapacidad.getText();
         String u="";
         if(rdbActivo.isSelected()){
             u="A";
         }else if(rdbInactivo.isSelected()){
             u="I";
         }
-        con.modificaLaboratorio(y,v,x,u,tablaCategorias);
+        con.modificaEmpaque(y,v,l,u,x,tablaCategorias);
     }//GEN-LAST:event_btnActualizarCatActionPerformed
 
     private void btnCancelarCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarCategoriaActionPerformed
@@ -227,26 +243,32 @@ public class laboratorioModificar extends javax.swing.JFrame {
         traerDatoTextfield(tablaCategorias);
     }//GEN-LAST:event_tablaCategoriasMouseClicked
 
-    private void txtNombreLaboratoiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreLaboratoiroActionPerformed
+    private void txtNombreEmpaqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreEmpaqueActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtNombreLaboratoiroActionPerformed
+    }//GEN-LAST:event_txtNombreEmpaqueActionPerformed
+
+    private void txtCapacidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCapacidadActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCapacidadActionPerformed
     public void traerDatoTextfield(JTable tabla) {
         rdbActivo.setSelected(false);
         rdbInactivo.setSelected(false);
         int fsel = tabla.getSelectedRow();
         try {
-            String nombre,origen, estatus;
-            int ID;
+            String nombre,capacidad, estatus;
+            int ID,idUnidad;
 
             m = (DefaultTableModel) tabla.getModel();
             ID = Integer.parseInt((String.valueOf(tabla.getValueAt(fsel, 0))));
             nombre = tabla.getValueAt(fsel, 1).toString();
-            origen = tabla.getValueAt(fsel, 2).toString();
+            capacidad = tabla.getValueAt(fsel, 2).toString();
             estatus = tabla.getValueAt(fsel, 3).toString();
+            idUnidad = Integer.parseInt((String.valueOf(tabla.getValueAt(fsel, 4))));
 
-            txtIDLab.setText(String.valueOf(ID));
-            txtOrigen.setText(origen);
-            txtNombreLaboratoiro.setText(nombre);
+            txtIDEmp.setText(String.valueOf(ID));
+            txtIdUnidad.setText(String.valueOf(idUnidad));
+            txtNombreEmpaque.setText(nombre);
+            txtCapacidad.setText(capacidad);
             if(estatus.equals("A")){
                 rdbActivo.setSelected(true);
             }else{
@@ -273,13 +295,13 @@ public class laboratorioModificar extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(laboratorioModificar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(empaqueModificar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(laboratorioModificar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(empaqueModificar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(laboratorioModificar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(empaqueModificar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(laboratorioModificar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(empaqueModificar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
@@ -349,7 +371,7 @@ public class laboratorioModificar extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new laboratorioModificar().setVisible(true);
+                new empaqueModificar().setVisible(true);
             }
         });
     }
@@ -367,6 +389,7 @@ public class laboratorioModificar extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
@@ -378,8 +401,9 @@ public class laboratorioModificar extends javax.swing.JFrame {
     private javax.swing.JRadioButton rdbActivo;
     private javax.swing.JRadioButton rdbInactivo;
     private javax.swing.JTable tablaCategorias;
-    private javax.swing.JTextField txtIDLab;
-    private javax.swing.JTextField txtNombreLaboratoiro;
-    private javax.swing.JTextField txtOrigen;
+    private javax.swing.JTextField txtCapacidad;
+    private javax.swing.JTextField txtIDEmp;
+    private javax.swing.JTextField txtIdUnidad;
+    private javax.swing.JTextField txtNombreEmpaque;
     // End of variables declaration//GEN-END:variables
 }

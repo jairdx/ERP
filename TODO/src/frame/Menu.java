@@ -237,7 +237,7 @@ connection con;
     }//GEN-LAST:event_miEliminarEmpaqueActionPerformed
 
     private void MIActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MIActualizarActionPerformed
-        ActualizarEmpaques AE=new ActualizarEmpaques();
+        empaqueModificar AE=new empaqueModificar();
         AE.setVisible(true);
         dispose(); 
     }//GEN-LAST:event_MIActualizarActionPerformed
@@ -255,7 +255,7 @@ connection con;
     }//GEN-LAST:event_jMenuItem10ActionPerformed
 
     private void jMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
-        UnidadMediaUpdate UMU=new  UnidadMediaUpdate();
+       unidadModificar UMU=new  unidadModificar();
         UMU.setVisible(true);
         dispose(); 
     }//GEN-LAST:event_jMenuItem12ActionPerformed
@@ -279,7 +279,7 @@ connection con;
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void miActualizarLaboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miActualizarLaboActionPerformed
-       ActualizarLab AL=new  ActualizarLab();
+       laboratorioModificar AL=new  laboratorioModificar();
        AL.setVisible(true);
        dispose();
     }//GEN-LAST:event_miActualizarLaboActionPerformed
