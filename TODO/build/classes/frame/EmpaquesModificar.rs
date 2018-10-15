@@ -1,0 +1,9 @@
+frame.categoriaModificar$3
+frame.categoriaModificar$2
+frame.categoriaModificar$1
+frame.categoriaModificar$8
+frame.categoriaModificar$7
+frame.categoriaModificar
+frame.categoriaModificar$6
+frame.categoriaModificar$5
+frame.categoriaModificar$4
