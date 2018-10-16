@@ -19,6 +19,7 @@ public class UnidadMedia extends javax.swing.JFrame {
     Object array[];
     Object datos[];
     connection con;
+    
     public UnidadMedia() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -27,7 +28,8 @@ public class UnidadMedia extends javax.swing.JFrame {
         con.abreConexion();
         con.consultaTodosUnidadMedida(tabla);
     }
-    private String[] getRemainingIdentifiers(int index){
+  
+  private String[] getRemainingIdentifiers(int index){
   String[] id=new String[tabla.getColumnCount()-1];
   int k=0;
   for(int i =0;i<tabla.getColumnCount();i++)
@@ -40,7 +42,8 @@ public class UnidadMedia extends javax.swing.JFrame {
   }
   return id;
   }
-           private void removeColumn(int columnIndex) {
+
+  private void removeColumn(int columnIndex) {
   String [][] data=new String[tabla.getRowCount()][tabla.getColumnCount()-1];
         for(int i =0;i<tabla.getRowCount();i++)
         {

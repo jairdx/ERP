@@ -3,8 +3,10 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.DefaultTableModel;
 public class EliminarLab extends javax.swing.JFrame {    
+    
     connection con;
     Object qht;
+    
     public EliminarLab() {
         con=new connection();
         con.abreConexion();

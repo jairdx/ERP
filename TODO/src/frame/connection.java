@@ -28,15 +28,15 @@ public class connection {
     String nom;
 
     public connection() {
-//        conexionURL = "jdbc:sqlserver:"
-//                + "//RAGGED516\\SQLEXPRESS:1033;"
-//                + "databaseName=Agroquimic;"
-//                + "user=adminOtro;password=admin";
+       conexionURL = "jdbc:sqlserver:"
+                + "//DESKTOP-5QLATER\\SQLEXPRESS:1433;"
+                + "databaseName=Agroquimic;"
+                + "user=admin;password=Admin123";
         
-        conexionURL = "jdbc:sqlserver:"
-                + "//DESKTOP-C1F48VC\\SQLEXPRESS:1433;"
-                + "databaseName=Agroquimicaprueba;"
-                + "user=admin;password=admin1";
+//        conexionURL = "jdbc:sqlserver:"
+//                + "//DESKTOP-C1F48VC\\SQLEXPRESS:1433;"
+//                + "databaseName=Agroquimicaprueba;"
+//                + "user=admin;password=admin1";
     }
     
     public void abreConexion() {
@@ -122,6 +122,7 @@ public class connection {
                 String estatus = rs.getString("estatus");
                 Object datosRenglon[] = {idCategoria, nombre, estatus};
                 tablaTemp.addRow(datosRenglon);
+                
             }
             tabla.setModel(tablaTemp);
         } catch (SQLException ex) {
@@ -682,5 +683,295 @@ public class connection {
             Logger.getLogger(connection.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    //----------------------------------------------------------------------------------------
+    
+    public void consultaTodosProductos(JTable tabla) {
+        DefaultTableModel tablaTemp = (DefaultTableModel) tabla.getModel();
+        cadenaSQL = "select idProducto, nombre, descripcion, puntoReorden, precioCompra, precioVenta, ingredienteActivo, "
+                + "bandaToxicologica, aplicacion, uso, idLaboratorio, idCategoria from Productos where estatus = '1'";
+        
+        tablaTemp.addColumn("Id de unidad");
+        tablaTemp.addColumn("Nombre");
+        tablaTemp.addColumn("Descripcion");
+        tablaTemp.addColumn("Punto de Reorden");
+        tablaTemp.addColumn("Precio de Compra");
+        tablaTemp.addColumn("Precio de Venta");
+        tablaTemp.addColumn("Ingrediente Activo");
+        tablaTemp.addColumn("Banda Toxicologica");
+        tablaTemp.addColumn("Aplicacion");
+        tablaTemp.addColumn("Uso");
+        tablaTemp.addColumn("ID Laboratorio");
+        tablaTemp.addColumn("ID Categoria");
+        
+        try {
+            stn = (Statement) con.createStatement();
+            rs = stn.executeQuery(cadenaSQL);
+            while (rs.next()) {
+                String a = rs.getString("idProducto");
+                String b = rs.getString("nombre");
+                String c = rs.getString("descripcion");
+                String d = rs.getString("puntoReorden");
+                String e = rs.getString("precioCompra");
+                String f = rs.getString("precioVenta");
+                String g = rs.getString("ingredienteActivo");
+                String h = rs.getString("bandaToxicologica");
+                String i = rs.getString("aplicacion");
+                String j = rs.getString("idLaboratorio");
+                String k = rs.getString("idCategoria");
+                
+                Object datosRenglon[] = {a, b, c, d, e, f, g, h, i, j, k};
+                tablaTemp.addRow(datosRenglon);
+            }
+            tabla.setModel(tablaTemp);
+        } catch (SQLException ex) {
+            Logger.getLogger(connection.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public int consultaidProducto() {
+        int id = 0;
+        cadenaSQL = "select top(1) idProducto from Productos order by idProducto desc";
+        try {
+            stn = (Statement) con.createStatement();
+            rs = stn.executeQuery(cadenaSQL);
+            while (rs.next()) {
+                id = rs.getInt("idProducto");
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(connection.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return id;
+    }
+    
+    public void insertarProductos(Object datos[]) {
+        cadenaSQL = 
+                "insert into Productos values (" + datos[0] + ",'" + datos[1] + "','" + datos[2] + "'," + datos[3] + ","
+                + datos[4] + "," + datos[5] + ",'" + datos[6] + "','" + datos[7] + "','" + datos[8] + "','" + datos[9] + "',"
+                + datos[10] + "," + datos[11] + "," + datos[12] + ")";
 
+        try {
+            stn = (Statement) con.createStatement();
+            stn.executeUpdate(cadenaSQL);
+        } catch (SQLException ex) {
+            Logger.getLogger(Connection.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void consultaPro(JTable tabla) {
+        DefaultTableModel tablaTemp = (DefaultTableModel) tabla.getModel();
+        cadenaSQL = "Select * from Productos where estatus='1'";
+        
+        tablaTemp.addColumn("Id de unidad");
+        tablaTemp.addColumn("Nombre");
+        tablaTemp.addColumn("Descripcion");
+        tablaTemp.addColumn("Punto de Reorden");
+        tablaTemp.addColumn("Precio de Compra");
+        tablaTemp.addColumn("Precio de Venta");
+        tablaTemp.addColumn("Ingrediente Activo");
+        tablaTemp.addColumn("Banda Toxicologica");
+        tablaTemp.addColumn("Aplicacion");
+        tablaTemp.addColumn("Uso");
+        tablaTemp.addColumn("ID Laboratorio");
+        tablaTemp.addColumn("ID Categoria");
+        
+        try {
+            stn = (Statement) con.createStatement();
+            rs = stn.executeQuery(cadenaSQL);
+            while (rs.next()) {
+                String a = rs.getString("idProducto");
+                String b = rs.getString("nombre");
+                String c = rs.getString("descripcion");
+                String d = rs.getString("puntoReorden");
+                String e = rs.getString("precioCompra");
+                String f = rs.getString("precioVenta");
+                String g = rs.getString("ingredienteActivo");
+                String h = rs.getString("bandaToxicologica");
+                String i = rs.getString("aplicacion");
+                String j = rs.getString("idLaboratorio");
+                String k = rs.getString("idCategoria");
+                
+                Object datosRenglon[] = {a, b, c, d, e, f, g, h, i, j, k};
+                tablaTemp.addRow(datosRenglon);
+            }
+            tabla.setModel(tablaTemp);
+        } catch (SQLException ex) {
+            Logger.getLogger(connection.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void consultaProAct(JTable tabla) {
+        limpiarTabla(tabla);
+        DefaultTableModel tablaTemp = (DefaultTableModel) tabla.getModel();
+        cadenaSQL = "Select * from Productos where estatus='1'";
+        
+        tablaTemp.addColumn("Id de unidad");
+        tablaTemp.addColumn("Nombre");
+        tablaTemp.addColumn("Descripcion");
+        tablaTemp.addColumn("Punto de Reorden");
+        tablaTemp.addColumn("Precio de Compra");
+        tablaTemp.addColumn("Precio de Venta");
+        tablaTemp.addColumn("Ingrediente Activo");
+        tablaTemp.addColumn("Banda Toxicologica");
+        tablaTemp.addColumn("Aplicacion");
+        tablaTemp.addColumn("Uso");
+        tablaTemp.addColumn("ID Laboratorio");
+        tablaTemp.addColumn("ID Categoria");
+        
+        try {
+            stn = (Statement) con.createStatement();
+            rs = stn.executeQuery(cadenaSQL);
+            while (rs.next()) {
+                String a = rs.getString("idProducto");
+                String b = rs.getString("nombre");
+                String c = rs.getString("descripcion");
+                String d = rs.getString("puntoReorden");
+                String e = rs.getString("precioCompra");
+                String f = rs.getString("precioVenta");
+                String g = rs.getString("ingredienteActivo");
+                String h = rs.getString("bandaToxicologica");
+                String i = rs.getString("aplicacion");
+                String j = rs.getString("idLaboratorio");
+                String k = rs.getString("idCategoria");
+                
+                Object datosRenglon[] = {a, b, c, d, e, f, g, h, i, j, k};
+                tablaTemp.addRow(datosRenglon);
+            }
+            tabla.setModel(tablaTemp);
+        } catch (SQLException ex) {
+            Logger.getLogger(connection.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void consultaProIna(JTable tabla) {
+        limpiarTabla(tabla);
+        DefaultTableModel tablaTemp = (DefaultTableModel) tabla.getModel();
+        cadenaSQL = "Select * from Productos where estatus='0'";
+        
+        try {
+            stn = (Statement) con.createStatement();
+            rs = stn.executeQuery(cadenaSQL);
+            while (rs.next()) {
+                String a = rs.getString("idProducto");
+                String b = rs.getString("nombre");
+                String c = rs.getString("descripcion");
+                String d = rs.getString("puntoReorden");
+                String e = rs.getString("precioCompra");
+                String f = rs.getString("precioVenta");
+                String g = rs.getString("ingredienteActivo");
+                String h = rs.getString("bandaToxicologica");
+                String i = rs.getString("aplicacion");
+                String j = rs.getString("idLaboratorio");
+                String k = rs.getString("idCategoria");
+                
+                Object datosRenglon[] = {a, b, c, d, e, f, g, h, i, j, k};
+                tablaTemp.addRow(datosRenglon);
+            }
+            tabla.setModel(tablaTemp);
+        } catch (SQLException ex) {
+            Logger.getLogger(connection.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void consultaProBuscada(JTable tabla, String nomb) {
+        limpiarTabla(tabla);
+        DefaultTableModel tablaTemp = (DefaultTableModel) tabla.getModel();
+        cadenaSQL = "Select * from Productos where nombre ='" + nomb + "'";
+        
+        try {
+            stn = (Statement) con.createStatement();
+            rs = stn.executeQuery(cadenaSQL);
+            while (rs.next()) {
+                String a = rs.getString("idProducto");
+                String b = rs.getString("nombre");
+                String c = rs.getString("descripcion");
+                String d = rs.getString("puntoReorden");
+                String e = rs.getString("precioCompra");
+                String f = rs.getString("precioVenta");
+                String g = rs.getString("ingredienteActivo");
+                String h = rs.getString("bandaToxicologica");
+                String i = rs.getString("aplicacion");
+                String j = rs.getString("idLaboratorio");
+                String k = rs.getString("idCategoria");
+                
+                Object datosRenglon[] = {a, b, c, d, e, f, g, h, i, j, k};
+                tablaTemp.addRow(datosRenglon);
+                
+            }
+            tabla.setModel(tablaTemp);
+        } catch (SQLException ex) {
+            Logger.getLogger(connection.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void consultaProTod(JTable tabla) {
+        limpiarTabla(tabla);
+        DefaultTableModel tablaTemp = (DefaultTableModel) tabla.getModel();
+        cadenaSQL = "Select * from Productos ";
+        
+        try {
+            stn = (Statement) con.createStatement();
+            rs = stn.executeQuery(cadenaSQL);
+            while (rs.next()) {
+                String a = rs.getString("idProducto");
+                String b = rs.getString("nombre");
+                String c = rs.getString("descripcion");
+                String d = rs.getString("puntoReorden");
+                String e = rs.getString("precioCompra");
+                String f = rs.getString("precioVenta");
+                String g = rs.getString("ingredienteActivo");
+                String h = rs.getString("bandaToxicologica");
+                String i = rs.getString("aplicacion");
+                String j = rs.getString("idLaboratorio");
+                String k = rs.getString("idCategoria");
+                
+                Object datosRenglon[] = {a, b, c, d, e, f, g, h, i, j, k};
+                tablaTemp.addRow(datosRenglon);
+            }
+            tabla.setModel(tablaTemp);
+        } catch (SQLException ex) {
+            Logger.getLogger(connection.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+        public void consultaProductoID(JTable tabla, int id) {
+        DefaultTableModel tablaTemp = (DefaultTableModel) tabla.getModel();
+        cadenaSQL = "Select * from Productos where estatus = '1' and idProducto = " + id;        
+        try {
+            stn = (Statement) con.createStatement();
+            rs = stn.executeQuery(cadenaSQL);
+            while (rs.next()) {
+                String a = rs.getString("idProducto");
+                String b = rs.getString("nombre");
+                String c = rs.getString("descripcion");
+                String d = rs.getString("puntoReorden");
+                String e = rs.getString("precioCompra");
+                String f = rs.getString("precioVenta");
+                String g = rs.getString("ingredienteActivo");
+                String h = rs.getString("bandaToxicologica");
+                String i = rs.getString("aplicacion");
+                String j = rs.getString("idLaboratorio");
+                String k = rs.getString("idCategoria");
+                
+                Object datosRenglon[] = {a, b, c, d, e, f, g, h, i, j, k};
+                tablaTemp.addRow(datosRenglon);
+            }
+            tabla.setModel(tablaTemp);
+        } catch (SQLException ex) {
+            Logger.getLogger(Connection.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+        
+    public void ActualizarProducto(Object datos[]) {
+        //cadenaSQL = "update Productos set nombre='" + datos[1].toString() + "',origen='" + datos[2].toString() + "',estatus='" + datos[3].toString() + "' where idLaboratorio=" + datos[0].toString();
+        cadenaSQL = "update Productos set nombre = '" + datos[1] + "', descripcion = '" + datos[2].toString() + "', puntoReorden = " + datos[3].toString() + ", precioCompra = " + datos[4].toString() + 
+                ", precioVenta = " + datos[5].toString() + ", ingredienteActivo = '" + datos[6].toString() + "', bandaToxicologica = '" + datos[7].toString() + "', aplicacion = '" + datos[8].toString() + 
+                "', idLaboratorio = " + datos[9].toString() + ", idCategoria = " + datos[10].toString();
+        try {
+            stn = (Statement) con.createStatement();
+            stn.executeUpdate(cadenaSQL);
+        } catch (SQLException ex) {
+            Logger.getLogger(connection.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }

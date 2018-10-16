@@ -12,6 +12,7 @@ package frame;
 public class ActualizarLab extends javax.swing.JFrame {
     connection con;
     Object datos[];
+    
     public ActualizarLab() {
         con=new connection();
         con.abreConexion();
