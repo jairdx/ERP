@@ -109,6 +109,12 @@ connection con;
 
         jLabel1.setText("ID Laboratorio");
 
+        edt_idlabp.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                edt_idlabpKeyPressed(evt);
+            }
+        });
+
         jLabel13.setText("ID Categoria");
 
         jMenu1.setText("Opciones");
@@ -260,17 +266,24 @@ connection con;
         datos[0] = (con.consultaidProducto()+1);
         datos[1] = String.valueOf(edt_nombrep.getText());
         datos[2] = String.valueOf(edt_descp.getText());
+        
         datos[3] = Integer.valueOf(edt_preorden.getText());
+        
         datos[4] = Float.valueOf(edt_preciocp.getText());
         datos[5] = Float.valueOf(edt_preciovp.getText());
+        
         datos[6] = String.valueOf(edt_ingact.getText());
         datos[7] = String.valueOf(edt_btoxic.getText());
         datos[8] = String.valueOf(edt_aplicp.getText());
         datos[9] = String.valueOf(edt_uso.getText());
+        
         datos[10] = '1';
+        
         datos[11] = String.valueOf(edt_idlabp.getText());
         datos[12] = String.valueOf(edt_idcatp.getText());
+        
         con.insertarProductos(datos);
+        
         edt_nombrep.setText("");
         edt_descp.setText("");
         edt_preorden.setText("");
@@ -284,7 +297,13 @@ connection con;
         edt_idcatp.setText("");
         con.consultaTodosProductos(Tabla_Productos);
     }//GEN-LAST:event_jButton1ActionPerformed
-
+    
+    private void edt_idlabpKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_edt_idlabpKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_edt_idlabpKeyPressed
+    
+    //--------------------validaciones----------------------------------------
+    
     /**
      * @param args the command line arguments
      */

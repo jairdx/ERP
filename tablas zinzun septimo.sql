@@ -11,6 +11,7 @@ estatus char
 constraint Marcas_PK primary key (idLaboratorio) 
 )
 go
+
 create table Categorias (
 idCategoria int,
 nombre varchar(30),
@@ -18,6 +19,9 @@ estatus char
 constraint Categorias1_PK primary key (idCategoria) 
 )
 go
+
+select * from usuarios
+
 create table Empaques (
 idEmpaque int,
 nombre varchar(80),
@@ -27,6 +31,7 @@ idUnidad int
 constraint Presentaciones_PK primary key (idEmpaque) 
 )
 go
+
 create table UnidadMedida (
 idUnidad int,
 nombre varchar(80),
@@ -35,6 +40,7 @@ estatus char
 constraint UnidadMedida_PK primary key (idUnidad) 
 )
 go
+
 CREATE TABLE Productos(
     idProducto int,  
     nombre varchar(50),  
@@ -52,6 +58,9 @@ CREATE TABLE Productos(
 	constraint Productos_PK primary key(idProducto)
 	) 
 go
+
+select * from Productos
+
 CREATE TABLE PresentacionesProducto(
 idPresentacion int,
 precioCompra float,
@@ -62,6 +71,7 @@ idEmpaque int,
 constraint PresentacionesProducto_PK PRIMARY KEY (idPresentacion)
 )
 go
+
 create table ExistenciasSucursal(
 idPresentacion int,
 idSucursal int,
@@ -69,6 +79,7 @@ Cantidad float
 constraint Categorias_PK primary key (idPresentacion,idSucursal) 
 )
 go
+
 CREATE TABLE Sucursales(
     idSucursal int, 
     nombre varchar(50),
@@ -82,6 +93,7 @@ CREATE TABLE Sucursales(
 	constraint Sucursales_PK primary key(idSucursal),
     ) 
 go
+
 CREATE TABLE ImagenesProducto(
 idImagen int,
 nombreImagen varchar(100),
@@ -91,6 +103,7 @@ idProducto INT
 constraint ImagenesProducto_PK primary key(idImagen),
 )
 go
+
 CREATE TABLE ProductosProveedor(
 idProveedor int,
 idPresentacion int,
@@ -102,6 +115,7 @@ cantMaxPedir int
 constraint ProductosProveedor_PK primary key(idProveedor,idPresentacion)
 )
 go
+----------------------------------------------------------------------------------
 CREATE TABLE PedidoDetalle(
 idPedidoDetalle int,
 cantPedida int,
@@ -115,6 +129,7 @@ idPresentacion int,
 constraint PedidoDetalle_PK PRIMARY KEY (idPedidoDetalle),
 )
 go
+
 CREATE TABLE Pedidos(
 idPedido int,
 FechaRegistro date,
@@ -128,6 +143,7 @@ idEmpleado int
 constraint Pedidos_PK primary key(idPedido)
 )
 go
+
 CREATE TABLE ContactosProveedor(
 idContacto int,
 nombre varchar(80),
@@ -137,6 +153,7 @@ idProveedor int,
 constraint ContactosProveedor_PK primary key (idContacto),
 )
 go
+
 CREATE TABLE Proveedores(
 idProveedor int,
 nombre varchar(80),
@@ -149,6 +166,7 @@ idCiudad int
 constraint Proveedores_PK primary key (idProveedor)
 )
 go
+
 create table CuentasProveedor(
 idCuentaProveedor int,
 idProveedor int,
@@ -157,6 +175,7 @@ banco varchar(30)
 constraint CuentasProveedores_PK primary key (idCuentaProveedor)
 )
 go
+
 CREATE TABLE Pagos(
 idPagos int,
 fecha date,
@@ -167,6 +186,7 @@ idCuentaProveedor int
 constraint Pagos_PK primary key(idPagos)
 )
 go
+
 Create table Ciudades(
 idCiudad int,
 nombre varchar(80),
@@ -175,6 +195,7 @@ estatus char
 constraint Ciudades_PK primary key(idCiudad)
 )
 go
+
 create table FormasPago(
 idFormaPago int,
 nombre varchar(50),
@@ -182,6 +203,7 @@ Estatus char
 constraint FormasPago_PK primary key(idFormaPago)
 )
 go
+
 create table Estados(
 idEstado int,
 nombre varchar(60),
@@ -190,6 +212,7 @@ estatus char
 constraint Estados_PK primary key(idEstado)
 )
 go
+
 create table Empleados(
 idEmpleado int,
 nombre varchar(30),
@@ -217,6 +240,7 @@ idSucursal int,
 constraint Empleados_PK primary key(idEmpleado)
 )
 go
+
 create table Horarios(
 idHorario int,
 horaInicio date,
@@ -226,6 +250,7 @@ idEmpleado int
 constraint Horarios_PK primary key(idHorario)
 )
 go
+
 create table Incapacidades(
 idIncapacidad int,
 fechaInicio date,
@@ -236,6 +261,7 @@ idEmpleado int
 constraint Incapacidades_PK primary key(idIncapacidad)
 )
 go
+
 create table Departamentos(
 idDepartamento int,
 nombre varchar(50),
@@ -243,6 +269,7 @@ estatus Char,
 constraint Departamentos_PK primary key(idDepartamento)
 )
 go
+
 Create table AusenciasJustificadas(
 idAusencia int,
 fechaSolicitud date,
@@ -254,6 +281,7 @@ idEmpleadoA int
 constraint AusenciasJustificadas_PK primary key (idAusencia) 
 )
 go
+
 create table Deduccciones(
 idDeducciones int,
 nombre varchar(30),
@@ -261,6 +289,7 @@ descripcion varchar(80)
 constraint  DeducccionesJustificadas_PK primary key (idDeducciones) 
 )
 go
+
 create table Percepciones(
 idPercepcion int,
 nombre varchar(30),
@@ -269,6 +298,7 @@ diasPagar int
 constraint Percepciones_PK primary key (idPercepcion) 
 )
 go
+
 create table nominasPercepciones(
 idNomina int,
 idPercepcion int,
@@ -276,6 +306,7 @@ importe float
 constraint NominasPercepciones_PK primary key (idPercepcion,idNomina) 
 )
 go
+
 create table nominasDeducciones(
 idNomina int,
 idDeducciones int,
@@ -283,6 +314,7 @@ importe float
 constraint nominaDeducciones_PK primary key (idnomina,idDeducciones) 
 )
 go
+
 create table TiposUsuarios(
 idTipoUsuario int,
 nombre varchar(80),
@@ -290,6 +322,7 @@ estatus char
 constraint TiposUsuarios_PK primary key(idTipoUsuario)
 )
 go
+
 create table Usuarios(
 nombre varchar(30),
 contrasenia varchar(20),
@@ -299,6 +332,7 @@ idTipoUsuario int
 constraint Usuarios_PK primary key(nombre)
 )
 go
+
 create table Puestos(
 idPuesto int,
 nombre varchar(60),
@@ -308,6 +342,7 @@ estatus char
 constraint Puestos_PK primary key(idPuesto)
 )
 go
+
 create table HistorialPuestos(
 idEmpleado int,
 idPuesto int,
@@ -318,6 +353,7 @@ salario float
 constraint HistorialPuestos_PK primary key(idEmpleado,idPuesto,idDepartamento,fechaInicio)
 )
 go
+
 create table Nominas(
 idNominas int,
 fechaPago date,
@@ -333,6 +369,7 @@ idFormaPago int
 constraint Nominas_PK primary key(idNominas)
 )
 go
+
 create table DocumentacionEmpleado(
 idDocumento int,
 nombreDocumento varchar(80),
@@ -342,6 +379,7 @@ idEmpleado int,
 constraint DocumentacionEmpleado_PK primary key(idDocumento)
 )
 go
+
 create table Ofertas(
 idOfertas int,
 nombre varchar(50),
@@ -355,6 +393,7 @@ idProducto int
 constraint Ofertas_PK primary key(idOfertas)
 )
 go
+
 create table OfertasAsociacion(
 idAsociacion int,
 idOfertas int,
@@ -362,6 +401,7 @@ estatus char
 constraint OfertasAsociacion_PK primary key(idAsociacion,idOfertas)
 )
 go
+
 create table Asociaciones(
 idAsociacion int,
 nombre varchar(100),
@@ -369,6 +409,7 @@ estatus char
 constraint Asociaciones_PK primary key(idAsociacion)
 )
 go
+
 create table Miembros(
 idCliente int,
 idAsociacion int,
@@ -377,6 +418,7 @@ fechaIncorporacion date
 constraint Miembros_PK primary key(idAsociacion,idCliente)
 )
 go
+
 create table cultivos(
 idCultivo int, 
 nombre varchar(100),
@@ -385,6 +427,7 @@ estatus char
 constraint cultivos_PK primary key(idCultivo)
 )
 go
+
 create table VentasDetalle(
 idVentaDetalle int,
 precioVenta float,
@@ -395,6 +438,7 @@ idPresentacion int,
 constraint VentasDetalle_PK primary key(idVentaDetalle)
 )
 go
+
 create table clientes(
 idCliente int,
 nombre varchar(100),
@@ -410,6 +454,7 @@ idCiudad int
 constraint cliente_PK primary key(idCliente)
 )
 go
+
 create table clientesCultivos(
 idClienteCultivo int,
 extension float,
@@ -420,6 +465,7 @@ idCiudad int,
 constraint clientesCultivos_PK primary key(idClienteCultivo)
 )
 go
+
 create table Ventas(
 idVentas int,
 fecha date,
@@ -434,6 +480,7 @@ idEmpleado int
 constraint Ventas_PK primary key(idVentas)
 )
 go
+
 create table Facturas(
 folio char,
 subtotal float,
@@ -447,6 +494,7 @@ idVenta int
 constraint Facturas_PK primary key(folio)
 )
 go
+
 create table Visitas(
 idVisita int,
 fechaPlaneada date,
@@ -460,6 +508,7 @@ idUnidadTransporte int
 constraint visitas_PK primary key(idVisita)
 )
 go
+
 create table Tripulacion(
 idEmpleado int,
 idEnvio int,
@@ -467,6 +516,7 @@ rol varchar(50)
 constraint Tripulacion_PK primary key(idEmpleado,idEnvio,rol)
 )
 go
+
 create table Cobros(
 idCobro int,
 fecha date,
@@ -476,6 +526,7 @@ idFormaPago int,
 constraint cobros_PK primary key(idCobro)
 )
 go
+
 create table UnidadesTransporte(
 idUnidadTransporte int,
 placas varchar(10),
@@ -486,6 +537,7 @@ capacidad int
 constraint UnidadesTransporte_PK primary key(idUnidadTransporte)
 )
 go
+
 create table Mantenimientos(
 idMantenimiento int,
 fecha date ,
@@ -497,6 +549,7 @@ idUnidadTransporte int,
 constraint mantenimientos_PK primary key(idMantenimiento)
 )
 go
+
 create table Envios(
 idEnvio int,
 fechaEntregaPlaneada date,
@@ -655,12 +708,20 @@ insert into CIUDADES values(4,'Zapopan',2,'A')
 
 	insert into Usuarios values('jairdx','cindy','A',5,1)
 	insert into Usuarios values('ragged','516','A',1,2)
+	insert into Usuarios values('fernando','123','A',3,2)
+
+	select * from Usuarios
 
 	update Usuarios set estatus='I' where nombre='ragged'
 
 	insert into Empleados values(5,'jair','elias','arroyo','M','07/07/2017','07/01/1997',1500.00,'1Q2W3E4R5T','Soltero',10,3,'1','shangari','el opeño','59833','Universidad',1.5,'A',1,1,1,1)
 	insert into Empleados values(1,'carlos','gerardo','del rio pulido','M','08/01/2012','04/01/1977',1564.00,'1QBEARR5T','Casado',9,2,'10','Jesus carranza','el carmen','59620','Universidad',1.6,'A',2,2,2,2)
-	insert into EMPLEADOS(5,''
+	--insert into EMPLEADOS(5,''
 
 
 	select name from sys.tables where name like 'Emp%'
+
+
+	-----------pruebas
+
+	select * from Productos
