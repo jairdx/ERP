@@ -1172,4 +1172,165 @@ public class connection {
         }
         return id;
     }
+    
+     //  ------------------------------------------consultas-----------------------------------------------
+ public void consultaprov(JTable tabla) {
+        limpiarTabla(tabla);
+        DefaultTableModel tablaTemp = (DefaultTableModel) tabla.getModel();
+        cadenaSQL = "Select * from proveedores ";
+        tablaTemp.addColumn("ID Proveedor");
+        tablaTemp.addColumn("Nombre");
+        tablaTemp.addColumn("Telefono");
+        tablaTemp.addColumn("E-mail");
+        tablaTemp.addColumn("Direccion");
+        tablaTemp.addColumn("Colonia");
+        tablaTemp.addColumn("Codigo posal");
+        tablaTemp.addColumn("ID Ciudad");
+        try {
+            stn = (Statement) con.createStatement();
+            rs = stn.executeQuery(cadenaSQL);
+            while (rs.next()) {
+                String idProveedor = rs.getString("idProveedor");
+                String nombre = rs.getString("nombre");
+                String telefono = rs.getString("telefono");
+                String email = rs.getString("email");
+                String direccion = rs.getString("direccion");
+                String colonia = rs.getString("colonia");
+                String codigopostar = rs.getString("codigopostar");
+                String idCiudad = rs.getString("idCiudad");
+                Object datosRenglon[] = {idProveedor, nombre, telefono, email,direccion,colonia,codigopostar,idCiudad};
+                tablaTemp.addRow(datosRenglon);
+            }
+            tabla.setModel(tablaTemp);
+        } catch (SQLException ex) {
+            Logger.getLogger(connection.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+ 
+  public void consultaPedidos(JTable tabla) {
+        limpiarTabla(tabla);
+        DefaultTableModel tablaTemp = (DefaultTableModel) tabla.getModel();
+        cadenaSQL = "select * from pedidos ";
+        tablaTemp.addColumn("ID Pedido");
+        tablaTemp.addColumn("Fecha de registro");
+        tablaTemp.addColumn("Fecha de recepcion");
+        tablaTemp.addColumn("Total a pagar");
+        tablaTemp.addColumn("Cant. pagada");
+        tablaTemp.addColumn("Estatus");
+        tablaTemp.addColumn("ID Proveedor");
+        tablaTemp.addColumn("ID Sucursal");
+        tablaTemp.addColumn("ID Empleado");
+        try {
+            stn = (Statement) con.createStatement();
+            rs = stn.executeQuery(cadenaSQL);
+            while (rs.next()) {
+                String idPedido = rs.getString("idPedido");
+                String FechaRegistro = rs.getString("FechaRegistro");
+                String FechaRecepcion = rs.getString("FechaRecepcion");
+                String totalPagar = rs.getString("totalPagar");
+                String cantidadPagada = rs.getString("cantidadPagada");
+                String estatus = rs.getString("estatus");
+                String idProveedor = rs.getString("idProveedor");
+                String idSucursal = rs.getString("idSucursal");
+                String idEmpleado = rs.getString("idEmpleado");
+                Object datosRenglon[] = {idPedido, FechaRegistro, FechaRecepcion, totalPagar, cantidadPagada,estatus,idProveedor,idSucursal,idEmpleado
+                };
+                tablaTemp.addRow(datosRenglon);
+            }
+            tabla.setModel(tablaTemp);
+        } catch (SQLException ex) {
+            Logger.getLogger(connection.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+  
+      public int consultaIDPedidos() {
+        int idPedido = 0;
+        cadenaSQL = "select top(1) idPedido from Pedidos order by idPedido desc ";
+        try {
+            stn = (Statement) con.createStatement();
+            rs = stn.executeQuery(cadenaSQL);
+            while (rs.next()) {
+                idPedido = rs.getInt("idPedido");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Connection.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return idPedido;
+    }
+ 
+    public void consultaPedidosEstatus(JTable tabla) {
+        limpiarTabla(tabla);
+        DefaultTableModel tablaTemp = (DefaultTableModel) tabla.getModel();
+        cadenaSQL = "select * from pedidos where estatus='D' ";
+        tablaTemp.addColumn("ID Pedido");
+        tablaTemp.addColumn("Fecha de registro");
+        tablaTemp.addColumn("Fecha de recepcion");
+        tablaTemp.addColumn("Total a pagar");
+        tablaTemp.addColumn("Cant. pagada");
+        tablaTemp.addColumn("Estatus");
+        tablaTemp.addColumn("ID Proveedor");
+        tablaTemp.addColumn("ID Sucursal");
+        tablaTemp.addColumn("ID Empleado");
+        try {
+            stn = (Statement) con.createStatement();
+            rs = stn.executeQuery(cadenaSQL);
+            while (rs.next()) {
+                String idPedido = rs.getString("idPedido");
+                String FechaRegistro = rs.getString("FechaRegistro");
+                String FechaRecepcion = rs.getString("FechaRecepcion");
+                String totalPagar = rs.getString("totalPagar");
+                String cantidadPagada = rs.getString("cantidadPagada");
+                String estatus = rs.getString("estatus");
+                String idProveedor = rs.getString("idProveedor");
+                String idSucursal = rs.getString("idSucursal");
+                String idEmpleado = rs.getString("idEmpleado");
+                Object datosRenglon[] = {idPedido, FechaRegistro, FechaRecepcion, totalPagar, cantidadPagada,estatus,idProveedor,idSucursal,idEmpleado
+                };
+                tablaTemp.addRow(datosRenglon);
+            }
+            tabla.setModel(tablaTemp);
+        } catch (SQLException ex) {
+            Logger.getLogger(connection.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }  
+    
+    //-----------------------Para Insetar datos------------------------------------------
+    
+        public void insertarPedido(Object datos[],JTable tabla) {
+        cadenaSQL = "INSERT into Pedidos  VALUES ("+ datos[0].toString() + ",'" //int
+                + datos[1].toString() + "','" //varchar
+                + datos[2].toString() + "',"//Varchar
+                + datos[3].toString() + "," //float
+                + datos[4].toString() + ",'"  //float
+                + datos[5].toString() + "',"  //char
+                + datos[6].toString() + ","   //int
+                + datos[7].toString() + ","   //int
+                + datos[8].toString() + ",)"; //int
+      
+        try {
+            stn = (Statement) con.createStatement();
+            stn.executeUpdate(cadenaSQL);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "No se pueden ingresar los datos");
+        }
+    }
+
+//            public void insertarPedido( int iIdPedido, String sFechaDeregistro, String sFechaRecepcion,float fTotalApagar,float fCantidadPagada, char chEstatus,int iIdProveedor,int iIdSucursal, int IidEmpleado) {
+//    cadenaSQL= "exec InsertPedi "+iIdPedido",'"+sFechaDeregistro+"','"+sFechaRecepcion+"',"+fTotalApagar","+fCantidadPagada",'"+chEstatus+"',"+iIdProveedor","+iIdSucursal","+IidEmpleado",";
+////            +  Integer.parseInt(String.valueOf(datos[0])) + ",'"
+////            + datos[1] + "','"
+////            + datos[2] + "','"
+////            + datos[3] + "'" ;
+//        
+//        try {
+//            con=DriverManager.getConnection(conexionURL);
+//            stn = (Statement) con.createStatement();
+//            rs = stn.executeQuery(cadenaSQL);
+//            JOptionPane.showMessageDialog(null, "Datos Ingresados");
+//        }catch (SQLException ex) {
+//            JOptionPane.showMessageDialog(null, "EL LABORATORIO YA EXISTE" + ex);
+//        }
+//    
+//            }   
 }
