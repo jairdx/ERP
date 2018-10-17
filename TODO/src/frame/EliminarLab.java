@@ -143,7 +143,7 @@ public class EliminarLab extends javax.swing.JFrame {
 
     private void tbleliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbleliminarMouseClicked
         int irow =tbleliminar.rowAtPoint(evt.getPoint());
-        qht=tbleliminar.getValueAt(irow,0);  
+        qht = tbleliminar.getValueAt(irow,0);  
     }//GEN-LAST:event_tbleliminarMouseClicked
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed

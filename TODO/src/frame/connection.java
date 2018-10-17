@@ -29,9 +29,9 @@ public class connection {
 
     public connection() {
         conexionURL = "jdbc:sqlserver:"
-                + "//RAGGED516\\SQLEXPRESS:1033;"
+                + "//DESKTOP-5QLATER\\SQLEXPRESS:1433;"
                 + "databaseName=Agroquimic;"
-                + "user=adminOtro;password=admin";
+                + "user=admin;password=Admin123";
         
 //        conexionURL = "jdbc:sqlserver:"
 //                + "//DESKTOP-C1F48VC\\SQLEXPRESS:1433;"
@@ -1061,7 +1061,7 @@ public class connection {
         }
     }
     
-        public void consultaProductoID(JTable tabla, int id) {
+    public void consultaProductoID(JTable tabla, int id) {
         DefaultTableModel tablaTemp = (DefaultTableModel) tabla.getModel();
         cadenaSQL = "Select * from Productos where estatus = '1' and idProducto = " + id;        
         try {
@@ -1089,16 +1089,87 @@ public class connection {
         }
     }
         
-    public void ActualizarProducto(Object datos[]) {
-        //cadenaSQL = "update Productos set nombre='" + datos[1].toString() + "',origen='" + datos[2].toString() + "',estatus='" + datos[3].toString() + "' where idLaboratorio=" + datos[0].toString();
-        cadenaSQL = "update Productos set nombre = '" + datos[1] + "', descripcion = '" + datos[2].toString() + "', puntoReorden = " + datos[3].toString() + ", precioCompra = " + datos[4].toString() + 
-                ", precioVenta = " + datos[5].toString() + ", ingredienteActivo = '" + datos[6].toString() + "', bandaToxicologica = '" + datos[7].toString() + "', aplicacion = '" + datos[8].toString() + 
-                "', idLaboratorio = " + datos[9].toString() + ", idCategoria = " + datos[10].toString();
+    public void EliminarProducto(String id) {
+        cadenaSQL = "update Productos set estatus = '0' where idProducto = " + id;
         try {
             stn = (Statement) con.createStatement();
             stn.executeUpdate(cadenaSQL);
         } catch (SQLException ex) {
             Logger.getLogger(connection.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+        
+    public void ActualizarProducto(Object datos[]) {
+        //cadenaSQL = "update Productos set nombre='" + datos[1].toString() + "',origen='" + datos[2].toString() + "',estatus='" + datos[3].toString() + "' where idLaboratorio=" + datos[0].toString();
+        cadenaSQL = "update Productos set nombre = '" + datos[1] + "', descripcion = '" + datos[2].toString() + "', puntoReorden = " + datos[3].toString() + ", precioCompra = " + datos[4].toString() + 
+                ", precioVenta = " + datos[5].toString() + ", ingredienteActivo = '" + datos[6].toString() + "', bandaToxicologica = '" + datos[7].toString() + "', aplicacion = '" + datos[8].toString() + 
+                "', idLaboratorio = " + datos[9].toString() + ", idCategoria = " + datos[10].toString() + " where idProducto = " + datos[0].toString();
+        try {
+            stn = (Statement) con.createStatement();
+            stn.executeUpdate(cadenaSQL);
+        } catch (SQLException ex) {
+            Logger.getLogger(connection.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    //------------------------------------------------------------------------------------
+    
+    public void insertarPago(Object datos[]) {
+        cadenaSQL = 
+                "insert into Pagos values (" + datos[0] + ",'" + datos[1] + "', " + datos[2] + " ," + datos[3] + ","
+                + datos[4] + "," + datos[5] + " )";
+
+        try {
+            stn = (Statement) con.createStatement();
+            stn.executeUpdate(cadenaSQL);
+        } catch (SQLException ex) {
+            Logger.getLogger(Connection.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void consultaTodosPagos(JTable tabla) {
+        DefaultTableModel tablaTemp = (DefaultTableModel) tabla.getModel();
+        cadenaSQL = "select * From Pagos ";
+        
+        tablaTemp.addColumn("ID Pago");
+        tablaTemp.addColumn("Fecha");
+        tablaTemp.addColumn("Importe");
+        tablaTemp.addColumn("ID Pedido");
+        tablaTemp.addColumn("ID Forma de Pago");
+        tablaTemp.addColumn("ID Cuenta Proveedor");
+        
+        try {
+            stn = (Statement) con.createStatement();
+            rs = stn.executeQuery(cadenaSQL);
+            while (rs.next()) {
+                String a = rs.getString("idPagos");
+                String b = rs.getString("fecha");
+                String c = rs.getString("importe");
+                String d = rs.getString("idPedido");
+                String e = rs.getString("idFormaPago");
+                String f = rs.getString("idCuentaProveedor");
+                
+                Object datosRenglon[] = {a, b, c, d, e, f};
+                tablaTemp.addRow(datosRenglon);
+            }
+            tabla.setModel(tablaTemp);
+        } catch (SQLException ex) {
+            Logger.getLogger(connection.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public int consultaidPago() {
+        int id = 0;
+        cadenaSQL = "select top(1) idPagos from Pagos order by idPagos desc";
+        try {
+            stn = (Statement) con.createStatement();
+            rs = stn.executeQuery(cadenaSQL);
+            while (rs.next()) {
+                id = rs.getInt("idPagos");
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(connection.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return id;
     }
 }

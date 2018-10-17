@@ -66,6 +66,11 @@ public class EliminarProducto extends javax.swing.JFrame {
 
             }
         ));
+        tabla_eliminar_producto.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabla_eliminar_productoMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tabla_eliminar_producto);
 
         jButton2.setText("Buscar");
@@ -132,11 +137,11 @@ public class EliminarProducto extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-                if(qht==null){
+    if(qht==null){
            JOptionPane.showMessageDialog(null, "Selecciona uno para continuar con doble click");
         }
         else{
-            con.EliminarLab(String.valueOf(qht));
+            con.EliminarProducto(String.valueOf(qht));
             JOptionPane.showMessageDialog(null, "Dato Eliminado con exito");
             qht=null;
         }
@@ -156,6 +161,11 @@ public class EliminarProducto extends javax.swing.JFrame {
         
         con.consultaProductoID(tabla_eliminar_producto, tex);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void tabla_eliminar_productoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabla_eliminar_productoMouseClicked
+        int irow =tabla_eliminar_producto.rowAtPoint(evt.getPoint());
+        qht = tabla_eliminar_producto.getValueAt(irow,0);  
+    }//GEN-LAST:event_tabla_eliminar_productoMouseClicked
 
     /**
      * @param args the command line arguments
